@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Odin Library</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Odin Library!</h1>
+        <button>Add a new book</button>
+        <dialog>
+            <form id="bookForm">
+                <div class="input-field">
+                    <label for="title">Book Title</label>
+                    <input type="text" name="title" id="title" placeholder="Title..." required>
+                </div>
+                <div class="input-field">
+                    <label for="author">Book Author</label>
+                    <input type="text" name="author" id="author" placeholder="Author..." required>
+                </div>
+                <div class="input-field">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages" placeholder="Number of pages..." required>
+                </div>
+                <div class="input-field">
+                    <fieldset>
+                        <legend>Already read?</legend>
+                        <label for="yes">Yes</label>
+                        <input type="radio" name="read" id="yes" value="1" required>
+                        <label for="no">No</label>
+                        <input type="radio" name="read" id="no" value="-1" required>
+                    </fieldset>
+                </div>
+                <button type="submit" form="bookForm">Submit</button>
+                <button class="close" type="button">Close Menu</button>
+            </form>
+        </dialog>
+        <div class="books">
+        </div>
+    </div>
+</body>
+</html>
