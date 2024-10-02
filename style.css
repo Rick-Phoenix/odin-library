@@ -124,3 +124,15 @@ li.readStatus {
     width: 100%;
 }
 
+.title {
+    font-style: italic;
+}
+
+ul.book.open li.header {
+    font-weight: 300;
+}
+
+ul.book li {
+    font-weight: 350;
+}
+

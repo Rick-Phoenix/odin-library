@@ -44,9 +44,11 @@ function setBookRow(book, index) {
     bookEntry.classList.add('book', 'open');
 
     const bookTitle = document.createElement('li');
+    bookTitle.classList.add('title');
     bookTitle.textContent = `${book.title}`;
 
     const bookAuthor = document.createElement('li');
+    bookAuthor.classList.add('author');
     bookAuthor.textContent = `${book.author}`;
 
     const bookPages = document.createElement('li');
@@ -54,7 +56,7 @@ function setBookRow(book, index) {
 
     let bookStatus = document.createElement('li');
     bookStatus.classList.add('readStatus');
-    bookStatus.textContent = `${book.read()}`;
+    bookStatus.textContent = isRead(book.readStatus);
 
     const changeBtn = document.createElement('button');
     changeBtn.textContent = 'Change';
@@ -62,8 +64,16 @@ function setBookRow(book, index) {
     changeBtn.setAttribute("data-index", `${index}`);
     changeBtn.addEventListener('click', () => {
         if (booksArr[index].readStatus == true) {
-            booksArr.readStatus = false;
-            console.log('switched')
+            booksArr[index].readStatus = false;
+            bookStatus.textContent = isRead(booksArr[index].readStatus)
+            bookStatus.appendChild(changeBtn);
+            return;
+        }
+        if (booksArr[index].readStatus == false || booksArr[index].readStatus == -1) {
+            booksArr[index].readStatus = true;
+            bookStatus.textContent = isRead(booksArr[index].readStatus)
+            bookStatus.appendChild(changeBtn);
+            return;
         }
     })
 
@@ -73,26 +83,25 @@ function setBookRow(book, index) {
     bookList.append(bookEntry);
 }
 
+function isRead(value) {
+    if (value == true) return "Yes";
+    if (value == -1 || value == false) return "No";
+}
 
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.readStatus = read;
-
-    this.read = function() {
-        if (this.readStatus == true) return "Yes"; 
-        if (this.readStatus == false) return "No";
-    };
 }
 
 function initializelist() {
     {
         bookList.innerHTML = `<ul class="book open">
-        <li>Title</li>
-        <li>Author</li>
-        <li>Pages</li>
-        <li>Read?</li>
+        <li class="header">Title</li>
+        <li class="header">Author</li>
+        <li class="header">Pages</li>
+        <li class="header">Read?</li>
         </ul>`;
 
         bookList.classList.add('open');
