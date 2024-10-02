@@ -35,21 +35,38 @@ submitBtn.addEventListener('click', (e) => {
     const newBook = new Book(title.value, author.value, pages.value, isRead.value);
     booksArr.push(newBook);
     const bookIndex = booksArr.indexOf(newBook);
-    setBookRow
-    
+    setBookRow(newBook, bookIndex);
 })
 
 function setBookRow(book, index) {
     const bookEntry = document.createElement('ul');
-    bookEntry.setAttribute('data-index', bookIndex);
+    bookEntry.setAttribute('data-index', index);
     bookEntry.classList.add('book', 'open');
-    bookEntry.innerHTML = `
-    <li>${newBook.title}</li>
-    <li>${newBook.author}</li>
-    <li>${newBook.pages}</li>
-    <li class="readStatus">${newBook.read}<button type="button" id="changeStatus">Change</button></li>
-    `
-    bookList.appendChild(bookEntry);
+
+    const bookTitle = document.createElement('li');
+    bookTitle.textContent = `${book.title}`;
+
+    const bookAuthor = document.createElement('li');
+    bookAuthor.textContent = `${book.author}`;
+
+    const bookPages = document.createElement('li');
+    bookPages.textContent = `${book.pages}`;
+
+    const bookStatus = document.createElement('li');
+    bookStatus.classList.add('readStatus');
+    bookStatus.textContent = `${book.read}`;
+
+    const changeBtn = document.createElement('button');
+    changeBtn.textContent = 'Change';
+    changeBtn.setAttribute("type", "button");
+    changeBtn.setAttribute("data-index", `${index}`);
+    changeBtn.addEventListener('click', () => {
+        console.log('lol')
+    })
+    bookStatus.appendChild(changeBtn);
+
+    bookEntry.append(bookTitle, bookAuthor, bookPages, bookStatus);
+    bookList.append(bookEntry);
 }
 
 function Book(title, author, pages, read) {
