@@ -32,7 +32,7 @@ submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     if (emptyList == true) initializelist();
     const isRead = document.querySelector('input[name="read"]:checked');
-    const newBook = new Book(title.value, author.value, pages.value, isRead.value);
+    const newBook = new Book(title.value, author.value, pages.value, +isRead.value);
     booksArr.push(newBook);
     const bookIndex = booksArr.indexOf(newBook);
     setBookRow(newBook, bookIndex);
@@ -52,28 +52,38 @@ function setBookRow(book, index) {
     const bookPages = document.createElement('li');
     bookPages.textContent = `${book.pages}`;
 
-    const bookStatus = document.createElement('li');
+    let bookStatus = document.createElement('li');
     bookStatus.classList.add('readStatus');
-    bookStatus.textContent = `${book.read}`;
+    bookStatus.textContent = `${book.read()}`;
 
     const changeBtn = document.createElement('button');
     changeBtn.textContent = 'Change';
     changeBtn.setAttribute("type", "button");
     changeBtn.setAttribute("data-index", `${index}`);
     changeBtn.addEventListener('click', () => {
-        console.log('lol')
+        if (booksArr[index].readStatus == true) {
+            booksArr.readStatus = false;
+            console.log('switched')
+        }
     })
+
     bookStatus.appendChild(changeBtn);
 
     bookEntry.append(bookTitle, bookAuthor, bookPages, bookStatus);
     bookList.append(bookEntry);
 }
 
+
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.readStatus = read;
+
+    this.read = function() {
+        if (this.readStatus == true) return "Yes"; 
+        if (this.readStatus == false) return "No";
+    };
 }
 
 function initializelist() {
