@@ -13,6 +13,7 @@ div.container {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
 }
 
 h1 {
@@ -75,12 +76,14 @@ dialog.open {
 
 div.books {
     background-color: #ffd6a6;
-    width: 50%;
-    margin-top: 20px;
+    width: 65%;
+    margin-top: 35px;
     margin-bottom: 30px;
+    padding: 12px 15px;
+    gap: 15px;
     border-radius: 15px;
     display: grid;
-    grid: 1fr / repeat(4, 1fr);
+    grid: 1fr / 1.5fr 1fr 0.5fr 0.5fr;
     transition: all 0.5s ease-out;
     transform: scale(0);
 }
@@ -92,6 +95,7 @@ ul.book {
     grid-column: span 4;
     align-items: center;
     padding: 0;
+    margin: 0;
     justify-items: center;
     transition: all 0.5s ease-out;
     transform: scale(0);
@@ -104,7 +108,7 @@ ul.book.open {
 
 li {
     list-style-type: none;
-    padding: 15px;
+    padding: 5px;
     margin: 0;
     word-break: break-word;
 }
