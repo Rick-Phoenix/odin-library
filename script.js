@@ -7,6 +7,7 @@ const bookList = document.querySelector('div.books');
 const title = dialog.querySelector('#title');
 const author = dialog.querySelector('#author');
 const pages = dialog.querySelector('#pages');
+let emptyList = true;
 
 booksArr = [];
 
@@ -29,10 +30,21 @@ closeBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    if (emptyList == true) {
+        bookList.innerHTML = `<ul class="book open">
+        <li>Title</li>
+        <li>Author</li>
+        <li>Pages</li>
+        <li>Read?</li>
+        </ul>`;
+
+        bookList.classList.add('open');
+    }
+    emptyList = false;
     const isRead = document.querySelector('input[name="read"]:checked');
     const newBook = new Book(title.value, author.value, pages.value, +isRead.value);
     const bookEntry = document.createElement('ul');
-    bookEntry.classList.add('book');
+    bookEntry.classList.add('book', 'open');
     bookEntry.innerHTML = `
     <li>${newBook.title}</li>
     <li>${newBook.author}</li>
