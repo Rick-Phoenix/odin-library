@@ -112,3 +112,15 @@ li {
     margin: 0;
     word-break: break-word;
 }
+
+li.readStatus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.readStatus button {
+    width: 100%;
+}
+

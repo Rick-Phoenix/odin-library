@@ -30,7 +30,37 @@ closeBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    if (emptyList == true) {
+    if (emptyList == true) initializelist();
+    const isRead = document.querySelector('input[name="read"]:checked');
+    const newBook = new Book(title.value, author.value, pages.value, isRead.value);
+    booksArr.push(newBook);
+    const bookIndex = booksArr.indexOf(newBook);
+    setBookRow
+    
+})
+
+function setBookRow(book, index) {
+    const bookEntry = document.createElement('ul');
+    bookEntry.setAttribute('data-index', bookIndex);
+    bookEntry.classList.add('book', 'open');
+    bookEntry.innerHTML = `
+    <li>${newBook.title}</li>
+    <li>${newBook.author}</li>
+    <li>${newBook.pages}</li>
+    <li class="readStatus">${newBook.read}<button type="button" id="changeStatus">Change</button></li>
+    `
+    bookList.appendChild(bookEntry);
+}
+
+function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+}
+
+function initializelist() {
+    {
         bookList.innerHTML = `<ul class="book open">
         <li>Title</li>
         <li>Author</li>
@@ -41,23 +71,4 @@ submitBtn.addEventListener('click', (e) => {
         bookList.classList.add('open');
     }
     emptyList = false;
-    const isRead = document.querySelector('input[name="read"]:checked');
-    const newBook = new Book(title.value, author.value, pages.value, +isRead.value);
-    const bookEntry = document.createElement('ul');
-    bookEntry.classList.add('book', 'open');
-    bookEntry.innerHTML = `
-    <li>${newBook.title}</li>
-    <li>${newBook.author}</li>
-    <li>${newBook.pages}</li>
-    <li>${newBook.read}</li>
-    `
-    bookList.appendChild(bookEntry);
-})
-
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = (read == true);
 }
-
